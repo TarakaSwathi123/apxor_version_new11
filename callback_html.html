@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Weather</title>
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src=""></script>
+
+
+  <style>
+    .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+  </style>
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap" rel="stylesheet">
+
+  <!-- Start of Integrating APXOR Web SDK -->
+
+  <script type="text/javascript" defer src="https://cdn.jsdelivr.net/gh/TarakaSwathi123/apxor_version_new11@main/clbackcore.js"></script>
+
+  <!-- Initializing Apxor QE -->
+  <script type="text/javascript" defer src="https://cdn.jsdelivr.net/gh/TarakaSwathi123/apxor_version_new11@main/clbackqe.js">
+
+
+  </script>
+
+  <!-- Initializing Apxor RTM -->
+  <script type="text/javascript" defer src="https://cdn.jsdelivr.net/gh/TarakaSwathi123/apxor_version_new11@main/clbackrtm.js"></script>
+
+  <script>
+
+    const _d = new Date();
+    (function (a, p, x, o, r) {
+      Apxor = a.Apxor || { _q: [], _st: _d };
+      [
+        "init",
+        "setUserId",
+        "setUserProperties",
+        "setSessionProperties",
+        "logPageView",
+        "logEvent",
+        "logClientEvent",
+        "setAppVersion",
+        "getClientId",
+        "getSessionId",
+        "startNewSession",
+        "endSession",
+        "flattenJSON",
+        "setRedirectionHandler",
+      ].forEach(function (m) {
+        Apxor[m] = function () {
+          this._q.push({ m: m, args: arguments });
+        };
+      });
+    })(window, document, "script");
+    Apxor.init(
+      "362a4f0e-a0f1-42f9-b1b5-7f42421bfd9b",
+      {
+        // Initialization option
+        idle_time_out: 1800,
+        plugins: ["ApxorRTM"],
+        version: 144,
+        level: "info",
+        debug: true
+      },
+      function success(data) {
+        console.log("SDK Initialized");
+      },
+      function error() {
+        console.log("SDK is not initialized...........");
+      }
+    );
+
+
+
+
+    (Math.floor(Math.random() * 2) == 0) ? Apxor.setUserProperties({
+      team: "web sdk",
+      members: 5,
+      task: "web",
+
+    }) : Apxor.setUserProperties({
+      team: "android sdk",
+      members: 5,
+      task: "android",
+    });
+
+    Apxor.setSessionProperties({
+      language: window.navigator.language,
+      location: window.navigator.geolocation,
+      protocol: window.location.protocol,
+      host: window.location.host,
+      agent: window.navigator.userAgent,
+      cookiesEnabled: window.navigator.cookieEnabled,
+    });
+
+  </script>
+  <script>
+    addEventListener('load', (event) => {
+      logHomePageEvent();
+    });
+
+    function myFunction() {
+      Apxor.logEvent("SearchClicked", {});
+
+    }
+    function homeclickedd() {
+      Apxor.logEvent("Home clicked", {
+        name: "home clicked",
+      });
+      Apxor.logClientEvent("Home clicked", {
+        name: "home clicked",
+      });
+    }
+    function usageInfo() {
+      Apxor.logEvent("Usage Info  clicked", {
+        name: "ui clicked",
+      });
+    }
+    function logHomePageEvent() {
+      Apxor.logEvent("HomePageLaunched", {
+        source: "direct",
+      });
+    }
+    function searchHover() {
+      Apxor.logEvent("SeachBarClicked", {
+      });
+
+    }
+  </script>
+    <style>
+      @font-face {
+        font-family: ttfname;
+        src: url(https://cdn.jsdelivr.net/gh/Gautham-Apxor/custom_fonts@main/BunchBlossomsPersonalUse-0nA4.ttf)
+          format("truetype");
+      }
+      @font-face {
+        font-family: otfname;
+        src: url(https://cdn.jsdelivr.net/gh/Gautham-Apxor/custom_fonts@main/otfname.otf)
+          format("opentype");
+      }
+      @font-face {
+        font-family: woff2name;
+        src: url(https://cdn.jsdelivr.net/gh/Gautham-Apxor/custom_fonts@main/woff2name.woff2)
+          format("woff2");
+      }
+      @font-face {
+        font-family: woffname;
+        src: url(https://cdn.jsdelivr.net/gh/Gautham-Apxor/custom_fonts@main/woffname.woff)
+          format("woff");
+      }
+    </style>
+
+</head>
+
+<body onload="logHomePageEvent()">
+
+  <video autoplay muted loop id="myVideo">
+    <source src="./assets/img/pexels-james-cheney-6933752.mp4" type="video/mp4" />
+  </video>
+
+  <nav class="navbar autohide navbar-expand-lg bg-light shadow" id="navbar">
+    <div class="container-fluid" data-aos="zoom-in-right">
+      <a class="navbar-heading" onclick = "toggle()">My Weather</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="menu_button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#home" onclick="homeclickedd()">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="./usage-info.html">How to Use?</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="./about.html">About</a>
+          </li>
+        </ul>
+
+
+      </div>
+
+
+
+    </div>
+  </nav>
+  <a style="background-color: aquamarine; text-align: center; display: flex; align-items: center; align-self: center; width: 1000px; flex-direction: column;"><div style="background-color: antiquewhite; text-align: center; width: 500px;">Text 1</div><div style="background-color: rgb(199, 236, 164); text-align: center; width: 500px;">Text 2</div></a>
+  <section id="home">
+    <div class="container">
+      <div class="col-sm text-center" data-aos="fade-up" data-aos-duration="3000">
+        <form class="d-inline-flex" role="search">
+          <input id="city" class="form-control me-2" type="search" placeholder="Search Your City" aria-label="Search"
+            onclick="searchHover()" />
+          <button class="btn btn-outline-success bg-success" type="submit" id="submit" onclick="myFunction()">
+            Search
+          </button>
+        </form>
+      </div>
+      <div data-aos="fade-up" data-aos-duration="3000">
+        <h1 class="my-4 text-center text-light">
+          Weather for <span id="cityName"></span>
+        </h1>
+      </div>
+      <main>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center" data-aos="fade-up" data-aos-duration="3000">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-dark">
+              <div class="card-header py-3 text-bg">
+                <h4 class="my-0 fw-normal">Temperature</h4>
+              </div>
+              <div class="card-body temp-bg">
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li id = "cover">Temperature <span id="temp"></span> °C</li>
+                  <li>Min Temperature <span id="min_temp"></span> °C</li>
+                  <li>Max Temperature <span id="max_temp"></span> °C</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-dark">
+              <div class="card-header py-3 text-bg-gray">
+                <h4 class="my-0 fw-normal">Humidity</h4>
+              </div>
+              <div class="card-body humidity-bg">
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>Humidity <span id="humidity"></span> %</li>
+                  <li>Feels like <span id="feels_like"></span> °C</li>
+                  <li>Wind Degree <span id="wind_degrees"></span></li>
+                   <li style="display: none;" id="invisible_ele">Wind Degree Invisible  <span id="wind_degrees invisble "></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-dark">
+              <div class="card-header py-3 text-bg-gray">
+                <h4 class="my-0 fw-normal">Wind</h4>
+              </div>
+              <div class="card-body wind-bg">
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>Wind Speed <span id="wind_speed"></span> m/sec</li>
+                  <li>Sunrise <span id="sunrise"></span></li>
+                  <li>Sunset <span id="sunset"></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </section>
+
+  <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2>Modal Header</h2>
+    </div>
+    <div class="modal-body">
+      <p>Some text in the Modal Body</p>
+      <p>Some other text...</p>
+    </div>
+    <div class="modal-footer">
+      <h3>Modal Footer</h3>
+    </div>
+  </div>
+
+</div>
+
+  <div id="myModal" class="modal" style="background-color:#808080;">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Sorry,we were unable to fetch the data for the city you entered.<br>
+        <b>Please enter the correct city name.</b>
+      </p>
+    </div>
+  </div>
+  <footer id="footer">
+    <div class="footer">
+      <p class="text-center" id="credit">
+        Built by WEB SDK Team</a>
+
+      </p>
+      <centre><a style="color:aliceblue;" href="./usecases.html">UseCases</a></centre>
+      <p class="text-center text-light text-bg-dark copy-right">&copy; 2023</p>
+    </div>
+  </footer>
+  <script src="./assets/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    AOS.init();
+    const originalElement = document.getElementById("cover");
+
+    function toggle() {
+      if (originalElement.hasAttribute("x")) {
+        originalElement.removeAttribute("x");
+        if (document.getElementById("superover")) {
+          const element = document.getElementById("superover");
+          element.remove();
+        }
+      } else {
+        originalElement.setAttribute("x", "y");
+        createAndOverlapElement();
+      }
+    }
+    function createAndOverlapElement() {
+      const newElement = document.createElement("div");
+      newElement.setAttribute("id", "superover");
+      newElement.style.position = "absolute";
+      newElement.style.width = `${originalElement.offsetWidth}px`;
+      newElement.style.height = `${originalElement.offsetHeight}px`;
+      newElement.style.backgroundColor = "blue";
+      newElement.style.left = `${originalElement.offsetLeft}px`;
+      newElement.style.top = `${originalElement.offsetTop}px`;
+      newElement.style.zIndex = 2; // Ensure it overlaps
+
+      // Add the new element to the same parent as the original element
+      originalElement.parentNode.appendChild(newElement);
+    }
+  </script>
+  <script>
+    function clientFunction(arg1, arg2) {
+      console.log(
+        `This is the client's function with arguments: ${arg1}, ${arg2}`
+      );
+    }
+
+    document.addEventListener(
+      "CALLBACK_EVENT_inline_shown",
+      (event) => {
+        ApxorRTM.registerForEventCallback(
+          clientFunction,
+          "argument1",
+          "argument2"
+        );
+      }
+    );
+  </script>
+
+  <script>
+function dismissCallback(){
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
+modal.style.display = "block";
+}
+
+document.addEventListener(
+      "CALLBACK_EVENT_inline_dismissed",
+      (event) => {
+        ApxorRTM.registerForEventCallback(
+          dismissCallback
+        );
+      }
+    );
+
+    function inappShownCallback(){
+      var ele = document.getElementById("invisible_ele");
+      ele.style.display="block";
+    }
+
+    document.addEventListener(
+      "CALLBACK_EVENT_inapp_shown",
+      (event) => {
+        ApxorRTM.registerForEventCallback(
+          inappShownCallback
+        );
+      }
+    );
+
+    function inlinetargetviewclickedCallback(){
+      alert("Hello! I am an alert box for testing!!");
+    }
+
+    document.addEventListener(
+      "CALLBACK_EVENT_InlineTargetViewClicked",
+      (event) => {
+        ApxorRTM.registerForEventCallback(
+          inlinetargetviewclickedCallback
+        );
+      }
+    );
+
+    function inappXiconCallback(){
+      var ele = document.getElementById("cityName");
+      ele.style.display="none";
+    }
+
+    document.addEventListener(
+      "CALLBACK_EVENT_apx_video_inapp_close_button_clicked",
+      (event) => {
+        ApxorRTM.registerForEventCallback(
+          inappXiconCallback
+        );
+      }
+    );
+
+    function surveylaunchedCallback(){
+      console.log("survey launched log for callback testing");
+    }
+
+    function surveyCompletedCallback(){
+      console.log("survey complted log for callback testing");
+    }
+
+    document.addEventListener(
+      "CALLBACK_EVENT_apx_survey_launched",
+      (event) => {
+        ApxorRTM.registerForEventCallback(
+          surveylaunchedCallback
+        );
+      }
+    );
+
+    document.addEventListener(
+      "CALLBACK_EVENT_apx_survey_completed",
+      (event) => {
+        ApxorRTM.registerForEventCallback(
+          surveyCompletedCallback
+        );
+      }
+    );
+
+  </script>
+</body>
+
+</html>
