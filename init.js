@@ -1,6 +1,4 @@
-console.log("Initializing Apxor");
- 
-  const _d = new Date();
+ const _d = new Date();
   (function (a, p, x, o, r) {
     Apxor = a.Apxor || { _q: [], _st: _d };
     [
@@ -24,9 +22,10 @@ console.log("Initializing Apxor");
       };
     });
    })(window, document, "script");
+     
  
  
- window.Apxor.init(
+    Apxor.init(
       "b0bf1fc7-b104-4e92-9cc5-590fcb685c29",
       {
         idle_time_out: 1800,
@@ -40,5 +39,6 @@ console.log("Initializing Apxor");
       function error() {
         console.log("APXOR SDK not initialized");
       });
+ 
    
 
