@@ -22,9 +22,6 @@
       };
     });
    })(window, document, "script");
-     
- 
- 
     Apxor.init(
       "b0bf1fc7-b104-4e92-9cc5-590fcb685c29",
       {
@@ -32,13 +29,9 @@
         plugins: ["ApxorRTM"],
         version: "144",
       },
-      
       function success(data) {
         console.log("APXOR SDK Initialized");
       },
       function error() {
         console.log("APXOR SDK not initialized");
       });
- 
-   
-
