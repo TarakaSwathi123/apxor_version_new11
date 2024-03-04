@@ -23,7 +23,7 @@
     });
    })(window, document, "script");
     Apxor.init(
-      "b0bf1fc7-b104-4e92-9cc5-590fcb685c29",
+      "823d8c43-a823-4045-9d69-49b441d13206",
       {
         idle_time_out: 1800,
         plugins: ["ApxorRTM"],
