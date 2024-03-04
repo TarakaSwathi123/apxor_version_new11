@@ -28,7 +28,7 @@
         idle_time_out: 1800,
         plugins: ["ApxorRTM"],
         version: "144",
-        auto_event_logging:true,
+        auto_event_logging:false,
       },
       function success(data) {
         console.log("APXOR SDK Initialized");
