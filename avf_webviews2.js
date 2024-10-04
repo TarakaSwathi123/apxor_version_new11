@@ -71,7 +71,7 @@ function getViewHierarchy(e, t, o, q, b, n, r, a) {
   }
 
   return (
-    "{'id':'" +
+    {'id':'" +
     u.id +
     "','bounds':" +
     u.bounds +
@@ -90,7 +90,7 @@ function getViewHierarchy(e, t, o, q, b, n, r, a) {
     u.content + // Pass the element's content
     "'},'views':[" +
     u.views +
-    "]}"
+    "]}
   );
 }
 
